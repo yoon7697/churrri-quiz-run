@@ -1,0 +1,56 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {test} from 'node:test';
+import {createRequire} from 'node:module';
+import vm from 'node:vm';
+import {ArenaEvent,Rules} from '../server/arena-motion.mjs';
+
+test('the Blender capsule matches the in-game collision envelope in all three bar lengths',()=>{
+  const T=createRequire(import.meta.url)('../vendor/three.min.js');
+  const bytes=readFileSync(new URL('../assets/sponge-bar.glb',import.meta.url));
+  assert.equal(bytes.toString('ascii',0,4),'glTF');
+  const jsonSize=bytes.readUInt32LE(12);
+  const asset=JSON.parse(bytes.toString('utf8',20,20+jsonSize));
+  assert.match(asset.asset.generator,/Blender/);
+  assert.ok(bytes.length<64*1024);
+  const primitive=asset.meshes[0].primitives[0];
+  assert.ok(asset.accessors[primitive.indices].count/3<600);
+  const position=asset.accessors[primitive.attributes.POSITION];
+  const view=asset.bufferViews[position.bufferView];
+  const start=28+jsonSize+(view.byteOffset||0)+(position.byteOffset||0);
+  const values=Float32Array.from({length:position.count*3},(_,i)=>bytes.readFloatLE(start+i*4));
+  const geometry=new T.BufferGeometry().setAttribute('position',new T.BufferAttribute(values,3));
+  const material=new T.MeshStandardMaterial();
+  material.map={image:{width:1,height:1}};
+  const template=new T.Group(),node=new T.Group(),scene=new T.Scene();
+  node.name='Sponge bar';
+  node.add(new T.Mesh(geometry,material));
+  template.add(node);
+  const ctx={drawImage(){},getImageData:()=>({data:new Uint8ClampedArray(4)}),putImageData(){}};
+  const document={createElement:()=>({getContext:()=>ctx})};
+  const js=readFileSync(new URL('../sponge-bars.js',import.meta.url),'utf8');
+  const draw=vm.runInNewContext(js+'\nbuildSpongeBars(T,scene,template)',{T,scene,template,ArenaEvent,Rules,document});
+
+  const rolls=[.62,.95,.9,.9,.9];
+  const event=ArenaEvent.choose(1,{hazards:true},0,()=>rolls.shift());
+  assert.equal(ArenaEvent.pieces(event).length,3);
+  draw(event,2900,null);
+  const {radius,halfHeight,barY}=ArenaEvent.config;
+  const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-5,`${a} != ${b}`);
+  ArenaEvent.frames(event,2900).forEach((frame,i)=>{
+    const group=scene.children[i],cushion=group.children[0],{min,max}=cushion.geometry.boundingBox;
+    assert.equal(group.visible,true);
+    close(group.position.x,frame.x);
+    close(group.position.z,frame.z);
+    close(cushion.position.y+max.y,ArenaEvent.barTop);
+    close(cushion.position.y+min.y,barY-halfHeight);
+    close(cushion.rotation.y,-Math.atan2(frame.dz,frame.dx));
+    close(max.x,frame.half+radius);
+    close(min.x,-frame.half-radius);
+    close(max.z,radius);
+    close(min.z,-radius);
+  });
+  draw(event,2900,2850);
+  assert.deepEqual(scene.children.map(bar=>bar.visible),[false,false,true]);
+  assert.ok(scene.children[2].position.y<0);
+});

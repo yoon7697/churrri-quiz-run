@@ -1,0 +1,25 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>우리 반 퀴즈런 · 수상 경기장</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="results.css"><body><main>
+<div id="world" aria-label="토끼와 네 가지 쿠션 발판이 있는 경기장"></div>
+
+<button id="sound-game" type="button" aria-pressed="false">🔇 소리 OFF</button>
+<nav><button id="play">서바이벌 시작</button><button id="group" aria-pressed="false">한 발판에 모으기</button><button id="camera" aria-pressed="false">전체 보기</button></nav>
+<div id="status" hidden><div><small>라운드</small><span id="round"></span></div><div><small>남은 시간</small><strong id="time"></strong></div><div><small>생존</small><span id="alive"></span></div><div><small>내 목숨</small><span id="hearts"></span></div></div>
+<output id="hazard" hidden></output>
+<section id="prompt" hidden aria-live="polite"></section>
+<h2 id="ceremony-banner" hidden aria-live="polite"></h2>
+<section id="match-results" hidden tabindex="0" aria-label="경기 결과"></section>
+<aside id="flood-warning" hidden aria-live="polite">
+  <strong><span aria-hidden="true">🌊</span> <span id="flood-seconds">3</span>초 후 물이 차오릅니다!</strong>
+  <span>선지 발판으로 이동하세요!</span>
+  <small id="flood-obstacle" hidden></small>
+</aside>
+<div id="watch" hidden><button id="prev" aria-label="이전 관전 대상">‹</button><span id="target"></span><button id="next" aria-label="다음 관전 대상">›</button></div>
+<dialog id="setup"><form id="settings"><h2>퀴즈 서바이벌</h2><p>문제가 사라지면 정답 번호의 발판으로 달려가세요. 시간이 끝날 때 정답 발판 위에 있으면, 점프 중이어도 정답입니다.</p>
+<label>문제 공개 <input name="reveal" type="number" min="1" max="30" value="3" required> 초</label>
+<label>이동 시간 <input name="move" type="number" min="3" max="60" value="15" required> 초</label>
+<label>목숨 <select name="lives"><option>1</option><option selected>3</option><option>5</option><option value="Infinity">무제한</option></select></label>
+<label>장애물 <select name="hazards"><option value="on" selected>ON</option><option value="off">OFF</option></select></label>
+<label><input name="push" type="checkbox"> 밀기 허용</label><label><input name="contact" type="checkbox" checked> 캐릭터 충돌 허용</label><div><button type="button" id="cancel">닫기</button><button type="submit" class="primary">시작</button></div></form></dialog>
+<div class="readout"><strong id="location">중앙 통로</strong><span class="keys">WASD · 방향키 이동　/　Shift 질주　/　Space 점프　/　왼쪽 Ctrl 밀기　/　드래그로 시점 회전</span></div>
+<div id="stick" aria-label="이동 조이스틱"><i></i></div><button id="sprint" type="button" aria-pressed="false">전력 질주</button><button id="push" type="button" aria-label="밀기 (왼쪽 Ctrl)" hidden><span id="push-caption">밀기</span> <kbd>왼쪽 Ctrl</kbd></button><button id="jump">점프 ↑</button><p id="loading" role="status" hidden>경기장을 준비하는 중입니다. 준비가 끝나면 첫 문제가 시작됩니다.</p><p id="error" role="alert" hidden>경기장을 준비하지 못했습니다. HTML 파일을 내려받은 뒤 Chrome이나 Edge에서 다시 열어 주세요.</p><noscript><p id="preview-help">HTML 파일을 내려받은 뒤 Chrome이나 Edge에서 열어 주세요.</p></noscript></main>
+<script src="vendor/three.min.js"></script><script src="movement-config.js"></script><script src="character-contact.js"></script><script src="rules.js"></script><script src="arena-event.js"></script><script src="impact.js"></script><script src="motion.js"></script><script src="lobby-scene.js"></script><script src="participants.js"></script><script src="software.js"></script><script src="camera-controls.js"></script><script src="collision.js"></script><script src="cloud-model.js"></script><script src="models.js"></script><script src="art.js"></script><script src="sea.js"></script><script src="stadium.js"></script><script src="sponge-bars.js"></script><script src="result-screen.js"></script><script src="ceremony.js"></script><script src="scene.js"></script><script src="survival.js"></script><script src="sound.js"></script><script src="hud.js"></script><script src="online-arena.js"></script><script src="game.js"></script></body></html>

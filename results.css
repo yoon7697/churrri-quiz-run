@@ -1,0 +1,8 @@
+.result-kicker{margin:0 0 4px;font-size:.78rem;font-weight:900;letter-spacing:.09em;color:var(--result-accent,#8251bd)}
+.result-winners{margin:6px 0 12px;font-size:clamp(1rem,2.5vw,1.3rem);font-weight:850;overflow-wrap:anywhere}
+.result-note{margin:8px 0 15px;font-size:.88rem}
+.result-table{width:100%;border-collapse:collapse;text-align:left;font-size:clamp(.78rem,2.1vw,.95rem)}
+.result-table th,.result-table td{padding:8px 5px;border-bottom:1px solid var(--result-line,#e2d5f0);overflow-wrap:anywhere}
+.result-table thead th{white-space:nowrap}
+.result-swatch{display:inline-block;margin-right:6px;width:.75em;height:.75em;border-radius:50%;border:1px solid #fff7;vertical-align:.05em}
+.result-badge{display:inline-block;margin-inline-start:6px;padding:1px 5px;border-radius:5px;background:#ffdf7b;color:#492c5e;font-size:.7rem;font-weight:800}

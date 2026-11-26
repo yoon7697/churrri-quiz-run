@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="quizrun-api" content=""><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#fff8e8"><title>우리 반 퀴즈런 | CHURRRI'S LAB</title><link rel="stylesheet" href="portal.css"><link rel="stylesheet" href="results.css"></head>
+<body>
+<header class="topbar wrap" id="siteHeader">
+  <a class="brand" href="#home" aria-label="우리 반 퀴즈런 홈으로"><span class="brand-icon" aria-hidden="true">🐇</span><span><strong>우리 반 퀴즈런</strong><small>달리고, 생각하고, 정답 발판으로!</small></span></a>
+  <span class="credit">made by <a href="https://churrri-lab.vercel.app/" target="_blank" rel="noopener noreferrer">CHURRRI'S LAB</a></span>
+  <nav class="top-actions" aria-label="도움말 및 소리"><button type="button" id="sound-home" class="pill" aria-pressed="false">🔇 소리 OFF</button><button type="button" class="pill" data-dialog-open="help">📖 게임 방법</button><button type="button" class="pill" data-dialog-open="preferences">⚙ 환경 설정</button></nav>
+</header>
+<main class="wrap" id="app"></main>
+<dialog id="help"><h2>게임 방법</h2><ol><li>문제와 네 가지 선택지를 읽어요.</li><li>시간 안에 정답이라고 생각한 발판 위로 이동해요. 제한 시간에 공중에 있어도 수평 위치로 판정해요.</li><li>정답이 공개된 뒤에도 움직일 수 있어요. 발판이 가라앉고 나면 물에 빠지지 않게 스펀지바를 피해요. 목숨을 모두 잃으면 다른 참가자를 관전해요.</li></ol><p><b>키보드</b> WASD·방향키 이동, Shift 질주, Space 점프. 드래그로 카메라를 돌려요. 밀기가 켜져 있으면 왼쪽 Ctrl 키로 앞에 있는 상대를 밀 수 있어요.</p><p><b>터치</b> 조이스틱으로 이동하고 오른쪽의 전력 질주와 점프 버튼을 사용해요. 밀기가 켜져 있으면 오른쪽에 밀기 버튼이 나타나요.</p><form method="dialog"><button class="pill">닫기</button></form></dialog>
+<dialog id="preferences"><form id="preference-form"><h2>환경 설정</h2><p>이 브라우저에서 혼자 하기의 기본값으로 사용합니다.</p><div id="preference-fields"></div><div class="actions"><button type="button" class="pill" data-close="preferences">취소</button><button class="solid">저장</button></div></form></dialog>
+<dialog id="leaving"><form method="dialog"><h2>경기장에서 나갈까요?</h2><p>진행 중인 경기는 종료됩니다.</p><div class="actions"><button value="cancel" class="pill">계속하기</button><button value="leave" class="solid">나가기</button></div></form></dialog>
+<dialog id="delete-quiz"><h2>퀴즈 삭제</h2><p></p><form method="dialog" class="actions"><button class="pill" value="cancel">취소</button><button class="solid" value="delete">삭제</button></form></dialog>
+<template id="arena-source"></template>
+<script src="vendor/jszip.min.js"></script>
+<script src="quiz-data.js"></script>
+<script src="workbook.js"></script>
+<script src="art.js"></script>
+<script src="movement-config.js"></script>
+<script src="rules.js"></script>
+<script src="arena-event.js"></script>
+<script src="survival.js"></script>
+<script src="sound.js"></script>
+<script src="portal.js"></script>
+<script src="workshop.js"></script>
+<script src="vendor/qrcode.js"></script>
+
+
+<script src="motion.js"></script>
+<script src="result-screen.js"></script>
+<script src="teacher-game.js"></script>
+<script src="online.js"></script>
+</body></html>

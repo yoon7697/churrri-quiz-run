@@ -1,0 +1,20 @@
+{
+  "name": "churrri-quizrun-online-stage7a",
+  "version": "0.7.0",
+  "private": true,
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "node --test test.cjs tests/sound.test.cjs tests/impact.test.cjs",
+    "test:online": "node --test tests/match.test.mjs tests/hazards.test.mjs tests/bar-socket.test.mjs tests/contact.test.mjs tests/online.test.mjs",
+    "dev": "npm run build && node tests/dev.mjs",
+    "dev:worker": "npm run build && wrangler dev --local",
+    "deploy:worker": "npm run build && wrangler deploy",
+    "test:browser": "node --test tests/browser.test.mjs",
+    "test:load": "node tests/load.mjs"
+  },
+  "devDependencies": {
+    "miniflare": "4.20260730.0",
+    "wrangler": "4.160.1",
+    "playwright": "1.65.0"
+  }
+}
