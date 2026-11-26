@@ -1,0 +1,23 @@
+# Dependencies and local build artifacts
+node_modules/
+public/index.html
+public/quiz-air-answer.html
+__pycache__/
+*.py[cod]
+coverage/
+playwright-report/
+test-results/
+
+# Hosting metadata and local credentials
+.vercel/
+.wrangler/
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*.p12
+*.pfx
+.npmrc
+.DS_Store
